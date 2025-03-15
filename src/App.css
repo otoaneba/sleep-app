@@ -1,0 +1,17 @@
+#root {
+  max-width: 1280px;
+}
+
+.app {
+  display: flex;
+}
+
+.main-content {
+  flex: 1;
+  min-width: 0; /* Prevents flex items from overflowing */
+  margin-left: 200px;
+  /* padding: 20px;
+  width: calc(100% - 250px);
+  min-height: 100vh;
+  background-color: #f5f6fa; */
+}
