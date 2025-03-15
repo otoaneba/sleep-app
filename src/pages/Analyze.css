@@ -1,0 +1,42 @@
+.analyze {
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .analyze h1 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+  
+  .date-range {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .form-group input {
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .chart {
+    margin-bottom: 40px;
+  }
+  
+  .chart h2 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+  }

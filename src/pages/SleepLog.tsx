@@ -15,7 +15,6 @@ interface SleepLogFormData {
 }
 
 const SleepLog: FC<SleepLogProps> = ({ date }) => {
-
   // State for the form inputs
   const [formData, setFormData] = useState<SleepLogFormData>({
     date: new Date().toISOString().split('T')[0], // Default to today's date
@@ -24,6 +23,9 @@ const SleepLog: FC<SleepLogProps> = ({ date }) => {
     sleepQuality: 'Fair', // Default value for sleep quality
     wakeUpCount: 0, // Default value for wake-up count
   });
+
+  // State for the success message after saving to local storage
+  const [showSuccess, setShowSuccess] = useState(false);
 
   // Handle form input changes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -41,6 +43,7 @@ const SleepLog: FC<SleepLogProps> = ({ date }) => {
     const timeParts = time.split(':');
     const adjustedDate = adjustDay ? addDays(datePart, adjustDay) : datePart;
     adjustedDate.setHours(parseInt(timeParts[0]), parseInt(timeParts[1]));
+    console.log(adjustedDate.toISOString());
     return adjustedDate.toISOString();
   };
 
@@ -107,8 +110,8 @@ const SleepLog: FC<SleepLogProps> = ({ date }) => {
         reference: 'Patient/123', // Replace with actual patient reference
       },
       effectivePeriod: {
-        start: formData.startTime,
-        end: formData.endTime,
+        start: startDateTime,
+        end: endDateTime,
       },
       valueQuantity: {
         value: duration,
@@ -160,8 +163,16 @@ const SleepLog: FC<SleepLogProps> = ({ date }) => {
       ],
     };
 
+    // Save to local storage for now 
+    // TODO: Save to repo or use axios to send to server
+    const existingObservations = JSON.parse(localStorage.getItem('sleepObservations') || '[]');
+    existingObservations.push(observation);
+    localStorage.setItem('sleepObservations', JSON.stringify(existingObservations));
+
     // Log the FHIR Observation to the console (or send to a server)
     console.log('FHIR Observation:', observation);
+
+    setShowSuccess(true)
 
     // Reset the form
     setFormData({
@@ -188,10 +199,21 @@ const SleepLog: FC<SleepLogProps> = ({ date }) => {
         return '271795006'; // generic
     }
   };
+
+  // Reset the success message
+  const handleAddAnother = () => {
+    setShowSuccess(false);
+  };
   
   return (
     <div className="sleep-log">
       <h1>Log Your Sleep</h1>
+      {showSuccess ? (
+        <div className="success-message">
+          <p>Sleep cycle logged successfully!</p>
+          <button onClick={handleAddAnother}>Add Another Cycle</button>
+        </div>
+      ) : (
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="date">Date:</label>
@@ -255,7 +277,8 @@ const SleepLog: FC<SleepLogProps> = ({ date }) => {
           />
         </div>
         <button type="submit">Log Sleep</button>
-      </form>
+        </form>
+      )}
 
       {/* Maybe display passed props (e.g., past logs) */}
       {date && (
