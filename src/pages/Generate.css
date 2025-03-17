@@ -1,0 +1,68 @@
+.generate {
+    margin-left: 20px;
+    padding: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+.generate h1 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+      
+.generate-content {
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .form-group {
+        margin-right: 6rem;
+    }
+}
+
+.radio-group {
+    padding-bottom: 1rem;
+    
+    span {
+        margin: 1rem 0 1rem 1rem;
+    }
+    .form-radio {
+        margin-left: 1rem;
+        margin-top: 1rem;
+    }
+}
+  
+.generate-form-card {
+background-color: white;
+border-radius: 0.5rem;
+box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+padding: 1.5rem;
+margin-bottom: 1.5rem;
+}
+
+.generate-results-card {
+background-color: white;
+border-radius: 0.5rem;
+box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+padding: 1.5rem;
+}
+
+.generate-info-box {
+background-color: #EFF6FF;
+border-radius: 0.5rem;
+padding: 1rem;
+margin-top: 1.5rem;
+}
+
+.generate-button {
+margin-top: 1.5rem;
+width: 100%;
+}
+
+.generate-calendar-button {
+margin-top: 1.5rem;
+display: flex;
+justify-content: center;
+}

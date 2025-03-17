@@ -15,11 +15,6 @@ const Sidebar: FC<SidebarProps> = () => (
             </NavLink>
           </li>
           <li>
-            <NavLink to="/profile" className={({ isActive }) => (isActive ? 'active' : '')}>
-              Profile
-            </NavLink>
-          </li>
-          <li>
             <NavLink to="/generate" className={({ isActive }) => (isActive ? 'active' : '')}>
               Generate New Schedule
             </NavLink>
