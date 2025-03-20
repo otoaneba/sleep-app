@@ -3,7 +3,8 @@ import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { parseISO, format, subDays, differenceInDays, addDays } from 'date-fns';
 import './Analyze.css';
-
+import { analyzeWithAzureAI } from '../services/azureAI';
+import { SleepData } from '../models/sleep';
 // Register Chart.js components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -30,6 +31,14 @@ const Analyze: FC<AnalyzeProps> = () => {
   useEffect(() => {
     const storedObservations = JSON.parse(localStorage.getItem('sleepObservations') || '[]');
     setObservations(storedObservations);
+    console.log("storedObservations: ", storedObservations[0])
+    console.log("observations: ",
+      "Sleep quality: ",storedObservations[0].component[0].valueCodeableConcept.text,
+      "\nwake-ups: ",storedObservations[0].component[1].valueQuantity.value,
+      "\nSleep time: ",storedObservations[0].effectivePeriod.start,
+      typeof storedObservations[0].effectivePeriod.start,
+      "\nWake-up time: ",storedObservations[0].effectivePeriod.end,
+      "\nSleep duration: ",storedObservations[0].valueQuantity.value)
   }, []);
 
   // Filter observations by date range
@@ -90,6 +99,30 @@ const Analyze: FC<AnalyzeProps> = () => {
       return sum + (wakeUpsComponent?.valueQuantity?.value || 0);
     }, 0);
   });
+
+  const handleAnalysis = async () => {
+    try {
+      let sleepData: SleepData = observations && observations.length > 0 ? {
+            sleepQuality: observations[0]?.component[0]?.valueCodeableConcept?.text || '',
+            wakeUps: observations[0]?.component[1]?.valueQuantity?.value || 0,
+            sleepTime: observations[0]?.effectivePeriod?.start || '',
+            wakeUpTime: observations[0]?.effectivePeriod?.end || '',
+            sleepDuration: observations[0]?.valueQuantity?.value || 0
+        } : {
+            sleepQuality: '',
+            wakeUps: 0,
+            sleepTime: '',
+            wakeUpTime: '',
+            sleepDuration: 0
+        };
+      
+        const result = await analyzeWithAzureAI(sleepData);
+        // Handle the analysis result (e.g., display it)
+        console.log(result.analysis);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+};
 
   // Chart data
   const sleepDurationChartData = {
@@ -196,6 +229,7 @@ const Analyze: FC<AnalyzeProps> = () => {
           </div>
         </>
       )}
+      <button onClick={handleAnalysis}>Analyze Sleep</button>
     </div>
   );
 };

@@ -1,54 +1,26 @@
-# React + TypeScript + Vite
+# Sleep Analysis App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the Sleep Analysis App! This app allows you to log and analyze your sleep data. Further, it uses Azure AI to analyze your sleep data and provide you with a summary of your sleep. It also has a feature to generate a sleep schedule to help you adjust or fix your jet lag; this feature is also useful for shift workers who frequently have to shift their sleep schedule.
 
-Currently, two official plugins are available:
+## Running the App
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Clone the repository
+2. Run `npm install` to install the dependencies
+3. Run `npm run dev` to start the development server
+4. Run `npm run start` to start the production server
 
-## Expanding the ESLint configuration
+## Running in production
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. Run `npm ci --omit=dev` to install only production dependencies.
+2. Run `npm start`, which will set NODE_ENV to production and start the server.
+  a. Alternatively, you can run `docker build -t sleep-analysis-app .` and then `docker run -p 3001:3001 sleep-analysis-app` to start the server in Docker.
+  b. For environment variables, you can set them in the `.env` file or use the `.env.example` file to create your own `.env` file.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+3. Check it runs on `http://localhost:3001`
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Running in development
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. Run `npm install` to install the dependencies.
+2. Run `npm run dev` to start the development server.
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+
