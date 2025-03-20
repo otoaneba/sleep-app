@@ -1,12 +1,19 @@
 import { config } from "../env.js";
 
-import { DefaultAzureCredential } from "@azure/identity";
+import { DefaultAzureCredential, ClientSecretCredential } from "@azure/identity";
 import ModelClient, { isUnexpected } from "@azure-rest/ai-inference";
 
 class AzureService {
     constructor() {
         this.endpoint = config.AZURE_ENDPOINT;
-        this.apiKey = config.AZURE_API_KEY;
+        if (config.ENV === 'production') {
+            this.tenantId = config.AZURE_TENANT_ID;
+            this.clientId = config.AZURE_CLIENT_ID;
+            this.clientSecret = config.AZURE_CLIENT_SECRET;
+            console.log("Azure credentials found", this.tenantId, this.clientId, this.clientSecret);
+        } else {
+            this.apiKey = config.AZURE_API_KEY;
+        }
     }
 
     async callAzureAIService(sleepData) {
@@ -28,33 +35,35 @@ class AzureService {
             Please provide insights about sleep quality, patterns, and suggestions for improvement.`;
 
         try {
+            if (!this.tenantId || !this.clientId || !this.clientSecret) {
+                throw new Error("Azure credentials not found");
+            }
             if (config.ENV === 'production') {
                 credential = new ClientSecretCredential(
-                    config.TENANT_ID,
-                    config.CLIENT_ID,
-                    config.CLIENT_SECRET
+                    this.tenantId,
+                    this.clientId,
+                    this.clientSecret
                 );
-
             } else {
-
-                const credential = new DefaultAzureCredential();
-                const client = new ModelClient(this.endpoint, credential, clientOptions);
-                console.log("Client initialized successfully");
-
-                const response = await client.path("chat/completions").post({
-                    body: {
-                        messages: [{ role: "user", content: prompt }],
-                        model: deploymentId,
-                        stream: false
-                    }
-                })
-
-                if (isUnexpected(response)) {
-                    throw response.body.error;
-                }
-                console.log("Response from Azure AI Service:")
-                console.log(response.body.choices[0].message.content);
+                credential = new DefaultAzureCredential();
             }
+
+            const client = new ModelClient(this.endpoint, credential, clientOptions);
+            console.log("Client initialized successfully");
+
+            const response = await client.path("chat/completions").post({
+                body: {
+                    messages: [{ role: "user", content: prompt }],
+                    model: deploymentId,
+                    stream: false
+                }
+            })
+
+            if (isUnexpected(response)) {
+                throw response.body.error;
+            }
+            console.log("Response from Azure AI Service:")
+            console.log(response.body.choices[0].message.content);
         } catch (error) {
             console.error('Client initialization error:', {
                 message: error.message,
