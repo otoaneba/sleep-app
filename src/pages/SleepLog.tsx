@@ -1,5 +1,5 @@
 import React, { FC, useState, FormEvent } from 'react';
-import { differenceInMinutes, parseISO, parse, addDays } from 'date-fns';
+import { differenceInMinutes, parseISO, addDays } from 'date-fns';
 import './SleepLog.css';
 
 interface SleepLogProps {

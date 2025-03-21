@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import { FC, useState } from "react";
 import { addDays, subHours, setHours, setMinutes, addMinutes, subMinutes, setYear, setMonth, setDate } from 'date-fns';
 import * as ics from "ics";
 import './Generate.css';

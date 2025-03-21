@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { useState } from 'react';
 import Sidebar from './components/Sidebar/Sidebar';
 import SleepLog from './pages/SleepLog';
 import Generate from './pages/Generate';
@@ -7,7 +6,6 @@ import Analyze from './pages/Analyze';
 import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <Router>

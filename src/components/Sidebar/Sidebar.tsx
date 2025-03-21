@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import React, { FC } from 'react';
+import { FC } from 'react';
 import './Sidebar.css';
 
 interface SidebarProps {}
