@@ -33,12 +33,12 @@ const Analyze: FC<AnalyzeProps> = () => {
     setObservations(storedObservations);
     console.log("storedObservations: ", storedObservations[0])
     console.log("observations: ",
-      "Sleep quality: ",storedObservations[0].component[0].valueCodeableConcept.text,
-      "\nwake-ups: ",storedObservations[0].component[1].valueQuantity.value,
-      "\nSleep time: ",storedObservations[0].effectivePeriod.start,
-      typeof storedObservations[0].effectivePeriod.start,
-      "\nWake-up time: ",storedObservations[0].effectivePeriod.end,
-      "\nSleep duration: ",storedObservations[0].valueQuantity.value)
+      "Sleep quality: ",storedObservations[0]?.component[0]?.valueCodeableConcept?.text,
+      "\nwake-ups: ",storedObservations[0]?.component[1]?.valueQuantity?.value,
+      "\nSleep time: ",storedObservations[0]?.effectivePeriod?.start,
+      typeof storedObservations[0]?.effectivePeriod?.start,
+      "\nWake-up time: ",storedObservations[0]?.effectivePeriod?.end,
+      "\nSleep duration: ",storedObservations[0]?.valueQuantity?.value)
   }, []);
 
   // Filter observations by date range
