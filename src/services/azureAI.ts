@@ -20,3 +20,32 @@ export const analyzeWithAzureAI = async (data: any) => {
     throw error;
   }
 };
+
+export const streamAzureAI = (data: any) => {
+  return new Promise((resolve, reject) => {
+      const eventSource = new EventSource(`${API_URL}/test-client-stream/stream?data=${encodeURIComponent(JSON.stringify(data))}`);
+      
+      let accumulatedData = '';
+
+      eventSource.onmessage = (event) => {
+          accumulatedData += event.data;
+          // You can process partial data here as it streams
+          console.log('Partial data:', event.data);
+      };
+
+      eventSource.onerror = (error) => {
+          eventSource.close();
+          reject(error);
+      };
+
+      eventSource.onopen = () => {
+          console.log('Streaming connection opened');
+      };
+
+      // Optional: Add a way to close the connection when complete
+      eventSource.addEventListener('end', () => {
+          eventSource.close();
+          resolve(accumulatedData);
+      });
+  });
+};

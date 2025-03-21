@@ -1,10 +1,13 @@
-import { FC, useState, useEffect } from 'react';
+import { FC, useState, useEffect, useRef } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { parseISO, format, subDays, differenceInDays, addDays } from 'date-fns';
 import './Analyze.css';
 import { analyzeWithAzureAI } from '../services/azureAI';
 import { SleepData } from '../models/sleep';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import { streamAzureAI } from '../services/azureAI'; // Import the streaming function
 // Register Chart.js components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -26,7 +29,9 @@ const Analyze: FC<AnalyzeProps> = () => {
   const [startDate, setStartDate] = useState<string>(format(subDays(new Date(), 7), 'yyyy-MM-dd')); // Default: last 7 days
   const [endDate, setEndDate] = useState<string>(format(new Date(), 'yyyy-MM-dd'));
   const [observations, setObservations] = useState<SleepObservation[]>([]);
-
+  const [analysisResult, setAnalysisResult] = useState<string>('');
+  const [isStreaming, setIsStreaming] = useState<boolean>(false);
+  const analysisRef = useRef<HTMLDivElement>(null);
   // Fetch data from local storage on mount
   useEffect(() => {
     const storedObservations = JSON.parse(localStorage.getItem('sleepObservations') || '[]');
@@ -123,6 +128,71 @@ const Analyze: FC<AnalyzeProps> = () => {
         console.error('Error:', error);
     }
 };
+
+const handleStreamingAnalysis = async () => {
+  setAnalysisResult('');
+  setIsStreaming(true);
+
+  const sleepData = observations && observations.length > 0 ? {
+    sleepQuality: observations[0]?.component[0]?.valueCodeableConcept?.text || '',
+    wakeUps: observations[0]?.component[1]?.valueQuantity?.value || 0,
+    sleepTime: observations[0]?.effectivePeriod?.start || '',
+    wakeUpTime: observations[0]?.effectivePeriod?.end || '',
+    sleepDuration: observations[0]?.valueQuantity?.value || 0
+  } : {
+    sleepQuality: '',
+    wakeUps: 0,
+    sleepTime: '',
+    wakeUpTime: '',
+    sleepDuration: 0
+  };
+
+  try {
+    const response = await fetch('http://localhost:3001/api/test-client-stream/stream', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(sleepData),
+    });
+
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    if (!response.body) throw new Error('Response body is null');
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+
+    // Define the expected type for the reader result
+    // let result: ReadableStreamReadResult<Uint8Array>;
+    while (true) {
+      // result = await reader.read();
+      //const { done, value } = result; // Destructure with explicit typing
+      const { done, value } = await reader.read();
+
+      if (done) break;
+
+      //if (!value) continue; // Skip if no value is present
+
+      const chunk = decoder.decode(value);
+      setAnalysisResult(prev => prev + chunk); 
+
+      // const cleanedChunk = chunk.replace(/^data: /gm, '').replace(/\n\n$/gm, '');
+      // setAnalysisResult((prev) => prev + cleanedChunk);
+    }
+
+  } catch (error) {
+    console.error('Streaming error:', error);
+    setAnalysisResult(`Error: ${error instanceof Error ? error.message : 'Unknown error'}`);
+  } finally {
+    setIsStreaming(false);
+  }
+};
+
+useEffect(() => {
+  if (analysisRef.current) {
+    analysisRef.current.scrollTop = analysisRef.current.scrollHeight;
+  }
+}, [analysisResult]);
 
   // Chart data
   const sleepDurationChartData = {
@@ -230,6 +300,26 @@ const Analyze: FC<AnalyzeProps> = () => {
         </>
       )}
       <button onClick={handleAnalysis}>Analyze Sleep</button>
+
+      <button onClick={handleStreamingAnalysis} disabled={isStreaming}>
+            {isStreaming ? (
+              <>
+                <span className="spinner" /> Analyzing...
+              </>
+            ) : (
+              'Analyze Sleep'
+            )}
+          </button>
+
+      {analysisResult && (
+        <div className="analysis-result" ref={analysisRef}>
+          <h2>AI Sleep Analysis</h2>
+          <div className="analysis-content">
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>{analysisResult}</ReactMarkdown>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };
