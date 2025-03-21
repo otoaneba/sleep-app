@@ -9,10 +9,12 @@ function App() {
 
   return (
     <Router>
+      fasdfdsaf
     <div className="app">
       <Sidebar />
       <div className="main-content">
         <Routes>
+          <Route path="/" element={<SleepLog />} />
           <Route path="/log" element={<SleepLog />} />
           <Route path="/generate" element={<Generate />} />
           <Route path="/analyze" element={<Analyze />} />
