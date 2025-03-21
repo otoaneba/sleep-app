@@ -146,43 +146,13 @@ const handleStreamingAnalysis = async () => {
     wakeUpTime: '',
     sleepDuration: 0
   };
-
   try {
-    const response = await fetch('http://localhost:3001/api/test-client-stream/stream', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(sleepData),
-    });
 
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-    if (!response.body) throw new Error('Response body is null');
-
-    const reader = response.body.getReader();
-    const decoder = new TextDecoder();
-
-    // Define the expected type for the reader result
-    // let result: ReadableStreamReadResult<Uint8Array>;
-    while (true) {
-      // result = await reader.read();
-      //const { done, value } = result; // Destructure with explicit typing
-      const { done, value } = await reader.read();
-
-      if (done) break;
-
-      //if (!value) continue; // Skip if no value is present
-
-      const chunk = decoder.decode(value);
-      setAnalysisResult(prev => prev + chunk); 
-
-      // const cleanedChunk = chunk.replace(/^data: /gm, '').replace(/\n\n$/gm, '');
-      // setAnalysisResult((prev) => prev + cleanedChunk);
-    }
-
-  } catch (error) {
-    console.error('Streaming error:', error);
-    setAnalysisResult(`Error: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    await streamAzureAI(
+      sleepData,
+      (chunk: string) => setAnalysisResult(prev => prev + chunk),
+      (error: string) => setAnalysisResult(`Error: ${error}`)
+    );
   } finally {
     setIsStreaming(false);
   }

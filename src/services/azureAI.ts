@@ -1,3 +1,4 @@
+import { SleepData } from '../models/sleep';
 const API_URL = 'http://localhost:3001/api';
 
 export const analyzeWithAzureAI = async (data: any) => {
@@ -21,31 +22,30 @@ export const analyzeWithAzureAI = async (data: any) => {
   }
 };
 
-export const streamAzureAI = (data: any) => {
-  return new Promise((resolve, reject) => {
-      const eventSource = new EventSource(`${API_URL}/test-client-stream/stream?data=${encodeURIComponent(JSON.stringify(data))}`);
-      
-      let accumulatedData = '';
+export const streamAzureAI = async (
+  sleepData: SleepData,
+  onChunk: (chunk: string) => void,
+  onError: (error: string) => void
+) => {
+  try {
+    const response = await fetch(`${API_URL}/test-client-stream/stream`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(sleepData),
+    });
 
-      eventSource.onmessage = (event) => {
-          accumulatedData += event.data;
-          // You can process partial data here as it streams
-          console.log('Partial data:', event.data);
-      };
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    if (!response.body) throw new Error('Response body is null');
 
-      eventSource.onerror = (error) => {
-          eventSource.close();
-          reject(error);
-      };
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
 
-      eventSource.onopen = () => {
-          console.log('Streaming connection opened');
-      };
-
-      // Optional: Add a way to close the connection when complete
-      eventSource.addEventListener('end', () => {
-          eventSource.close();
-          resolve(accumulatedData);
-      });
-  });
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      onChunk(decoder.decode(value));
+    }
+  } catch (error) {
+    onError(error instanceof Error ? error.message : 'Unknown error');
+  }
 };
