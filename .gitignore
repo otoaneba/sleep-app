@@ -27,6 +27,7 @@ dist-ssr
 .env
 .env.development
 .env.production
-
+server/src/.env.production
+server/src/.env.development
 # Log files
 *.log
