@@ -14,10 +14,10 @@ function App() {
       <Sidebar />
       <div className="main-content">
         <Routes>
-          <Route path="/" element={<SleepLog />} />
-          <Route path="/log" element={<SleepLog />} />
-          <Route path="/generate" element={<Generate />} />
-          <Route path="/analyze" element={<Analyze />} />
+          <Route path={import.meta.env.DEV ? "/" : "/pages/nabe7/sleep-app/"} element={<SleepLog />} />
+          <Route path={import.meta.env.DEV ? "/log" : "/pages/nabe7/sleep-app/log"} element={<SleepLog />} />
+          <Route path={import.meta.env.DEV ? "/generate" : "/pages/nabe7/sleep-app/generate"} element={<Generate />} />
+          <Route path={import.meta.env.DEV ? "/analyze" : "/pages/nabe7/sleep-app/analyze"} element={<Analyze />} />
         </Routes>
       </div>
     </div>
