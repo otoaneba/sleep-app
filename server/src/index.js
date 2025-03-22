@@ -9,7 +9,7 @@ const allowedOrigins = [
     'http://localhost:5173',
     'https://github.gatech.edu',
     'https://github.gatech.edu/pages/nabe7/sleep-app'
-  ];
+];
 
 const corsOptions = {
     origin: function(origin, callback) {
