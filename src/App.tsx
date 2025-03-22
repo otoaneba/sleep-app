@@ -8,16 +8,15 @@ import './App.css';
 function App() {
 
   return (
-    <Router>
-      fasdfdsaf
+    <Router basename={import.meta.env.DEV ? "/" : "/pages/nabe7/sleep-app/"}>
     <div className="app">
       <Sidebar />
       <div className="main-content">
         <Routes>
-          <Route path={import.meta.env.DEV ? "/" : "/pages/nabe7/sleep-app/"} element={<SleepLog />} />
-          <Route path={import.meta.env.DEV ? "/log" : "/pages/nabe7/sleep-app/log"} element={<SleepLog />} />
-          <Route path={import.meta.env.DEV ? "/generate" : "/pages/nabe7/sleep-app/generate"} element={<Generate />} />
-          <Route path={import.meta.env.DEV ? "/analyze" : "/pages/nabe7/sleep-app/analyze"} element={<Analyze />} />
+          <Route path={import.meta.env.DEV ? "/" : "/"} element={<SleepLog />} />
+          <Route path={import.meta.env.DEV ? "/log" : "log"} element={<SleepLog />} />
+          <Route path={import.meta.env.DEV ? "/generate" : "generate"} element={<Generate />} />
+          <Route path={import.meta.env.DEV ? "/analyze" : "analyze"} element={<Analyze />} />
         </Routes>
       </div>
     </div>

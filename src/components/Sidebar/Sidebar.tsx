@@ -10,17 +10,17 @@ const Sidebar: FC<SidebarProps> = () => (
       <nav>
         <ul>
           <li>
-            <NavLink to="/log" className={({ isActive }) => (isActive ? 'active' : '')}>
+            <NavLink to={import.meta.env.DEV ? "/log" : "log"} className={({ isActive }) => (isActive ? 'active' : '')}>
               Log
             </NavLink>
           </li>
           <li>
-            <NavLink to="/generate" className={({ isActive }) => (isActive ? 'active' : '')}>
+            <NavLink to={import.meta.env.DEV ? "/generate" : "generate"} className={({ isActive }) => (isActive ? 'active' : '')}>
               Generate New Schedule
             </NavLink>
           </li>
           <li>
-            <NavLink to="/analyze" className={({ isActive }) => (isActive ? 'active' : '')}>
+            <NavLink to={import.meta.env.DEV ? "/analyze" : "analyze"} className={({ isActive }) => (isActive ? 'active' : '')}>
               Analyze
             </NavLink>
           </li>
