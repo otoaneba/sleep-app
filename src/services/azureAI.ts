@@ -1,5 +1,5 @@
+import { API_URL } from './config';
 import { SleepData } from '../models/sleep';
-const API_URL = 'http://localhost:3001/api';
 
 export const analyzeWithAzureAI = async (data: any) => {
   try {

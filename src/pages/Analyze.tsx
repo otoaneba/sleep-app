@@ -123,7 +123,7 @@ const Analyze: FC<AnalyzeProps> = () => {
       
         const result = await analyzeWithAzureAI(sleepData);
         // Handle the analysis result (e.g., display it)
-        console.log(result.analysis);
+        console.log(result);
     } catch (error) {
         console.error('Error:', error);
     }

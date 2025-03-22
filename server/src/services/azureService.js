@@ -3,7 +3,6 @@ import { config } from "../env.js";
 import { DefaultAzureCredential, ClientSecretCredential } from "@azure/identity";
 import ModelClient, { isUnexpected } from "@azure-rest/ai-inference";
 import { createSseStream } from "@azure/core-sse";
-import { IncomingMessage } from "node:http";
 
 class AzureService {
     constructor() {
