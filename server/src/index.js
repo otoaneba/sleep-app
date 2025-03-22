@@ -5,8 +5,21 @@ import routes from './routes/routes.js';
 const app = express();
 const port = process.env.PORT || 3001;
 
+const allowedOrigins = [
+    'http://localhost:5173',
+    'https://github.gatech.edu',
+    'https://github.gatech.edu/pages/nabe7/sleep-app'
+  ];
+
 const corsOptions = {
-    origin: 'http://localhost:5173',
+    origin: function(origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+          callback(null, true);
+        } else {
+          console.log('Blocked by CORS:', origin);
+          callback(new Error('Not allowed by CORS'));
+        }
+      },
     methods: ['GET', 'POST'],
     credentials: false,
     allowedHeaders: ['Content-Type', 'Authorization']
@@ -20,15 +33,6 @@ app.use('/api', routes);
 
 app.get('/', (req, res) => {
     res.json({ message: 'Server is running!' });
-});
-
-app.post('/api/test', (req, res) => {
-    console.log('Received data:', req.body);
-    res.json({
-        message: 'Test successful for POST',
-        receivedData: req.body,
-        timestamp: new Date()
-    });
 });
   
 app.listen(port, () => {
