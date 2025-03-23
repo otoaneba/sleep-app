@@ -9,7 +9,7 @@ export default defineConfig(({mode}) => {
   base: mode === 'production' ? '/pages/nabe7/sleep-app/' : '/',
   define: {
     'import.meta.env.VITE_API_URL': JSON.stringify(
-      process.env.MODE === 'production'
+      mode === 'production'
         ? 'https://your-fly-app.fly.dev/api'
         : 'http://localhost:3001/api'
     )
