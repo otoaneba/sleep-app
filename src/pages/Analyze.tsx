@@ -3,8 +3,6 @@ import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { parseISO, format, subDays, differenceInDays, addDays } from 'date-fns';
 import './Analyze.css';
-import { analyzeWithAzureAI } from '../services/azureAI';
-import { SleepData } from '../models/sleep';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { streamAzureAI } from '../services/azureAI'; // Import the streaming function
