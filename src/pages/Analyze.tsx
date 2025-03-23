@@ -269,8 +269,6 @@ useEffect(() => {
           </div>
         </>
       )}
-      <button onClick={handleAnalysis}>Analyze Sleep</button>
-
       <button onClick={handleStreamingAnalysis} disabled={isStreaming}>
             {isStreaming ? (
               <>
