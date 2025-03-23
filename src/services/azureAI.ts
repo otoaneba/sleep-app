@@ -3,6 +3,9 @@ import { SleepData } from '../models/sleep';
 
 export const analyzeWithAzureAI = async (data: any) => {
   try {
+    console.log('API_URL', API_URL);
+    console.log('Current environment:', process.env.NODE_ENV);
+    console.log('API URL:', import.meta.env.VITE_API_URL);
     const response = await fetch(`${API_URL}/test-client`, {
       method: 'POST',
       headers: {
@@ -28,6 +31,9 @@ export const streamAzureAI = async (
   onError: (error: string) => void
 ) => {
   try {
+    console.log('API_URL', API_URL);
+    console.log('Current environment:', process.env.NODE_ENV);
+    console.log('API URL:', import.meta.env.VITE_API_URL);
     const response = await fetch(`${API_URL}/test-client-stream/stream`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

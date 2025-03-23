@@ -2,7 +2,9 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({mode}) => {
+  console.log('Mode:', mode);
+  return {
   plugins: [react()],
   base: process.env.NODE_ENV === 'production' ? '/pages/nabe7/sleep-app/' : '/',
   define: {
@@ -12,4 +14,5 @@ export default defineConfig({
         : 'http://localhost:3001/api'
     )
   }
+}
 })
