@@ -23,3 +23,4 @@ primary_region = 'ams'
 
 [env]
   NODE_ENV = "production"
+  PORT = "8080
