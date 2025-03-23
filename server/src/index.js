@@ -4,7 +4,6 @@ import routes from './routes/routes.js';
 
 const app = express();
 const port = process.env.PORT || 3001;
-console.log('Port:', port);
 
 const allowedOrigins = [
     'http://localhost:5173',
