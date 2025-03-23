@@ -105,30 +105,6 @@ const Analyze: FC<AnalyzeProps> = () => {
     }, 0);
   });
 
-  const handleAnalysis = async () => {
-    try {
-      let sleepData: SleepData = observations && observations.length > 0 ? {
-            sleepQuality: observations[0]?.component[0]?.valueCodeableConcept?.text || '',
-            wakeUps: observations[0]?.component[1]?.valueQuantity?.value || 0,
-            sleepTime: observations[0]?.effectivePeriod?.start || '',
-            wakeUpTime: observations[0]?.effectivePeriod?.end || '',
-            sleepDuration: observations[0]?.valueQuantity?.value || 0
-        } : {
-            sleepQuality: '',
-            wakeUps: 0,
-            sleepTime: '',
-            wakeUpTime: '',
-            sleepDuration: 0
-        };
-      
-        const result = await analyzeWithAzureAI(sleepData);
-        // Handle the analysis result (e.g., display it)
-        console.log(result);
-    } catch (error) {
-        console.error('Error:', error);
-    }
-};
-
 const handleStreamingAnalysis = async () => {
   setAnalysisResult('');
   setIsStreaming(true);
