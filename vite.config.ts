@@ -10,7 +10,7 @@ export default defineConfig(({mode}) => {
   define: {
     'import.meta.env.VITE_API_URL': JSON.stringify(
       mode === 'production'
-        ? 'https://sleep-app-backend.fly.dev'
+        ? 'https://sleep-app-backend.fly.dev/api'
         : 'http://localhost:3001/api'
     )
   }
