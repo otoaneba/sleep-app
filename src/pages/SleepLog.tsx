@@ -1,6 +1,7 @@
 import React, { FC, useState, FormEvent } from 'react';
 import { differenceInMinutes, parseISO, addDays } from 'date-fns';
 import './SleepLog.css';
+import { Link } from 'react-router-dom';
 
 interface SleepLogProps {
   date?: string;
@@ -215,18 +216,19 @@ const SleepLog: FC<SleepLogProps> = ({ date }) => {
         </div>
       ) : (
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="date">Date:</label>
+        <div className="form-group-logging">
+          {/* <label htmlFor="date">Date:</label> */}
           <input
             type="date"
             id="date"
             name="date"
             value={formData.date}
             onChange={handleChange}
+            placeholder="Date"
             required
           />
         </div>
-        <div className="form-group">
+        <div className="form-group-logging">
           <label htmlFor="startTime">Start Time:</label>
           <input
             type="time"
@@ -234,11 +236,13 @@ const SleepLog: FC<SleepLogProps> = ({ date }) => {
             name="startTime"
             value={formData.startTime}
             onChange={handleChange}
+            placeholder="I slept at"
             required
           />
+          {/* <label htmlFor="startTime">I went to sleep at:</label> */}
         </div>
-        <div className="form-group">
-          <label htmlFor="endTime">End Time:</label>
+        <div className="form-group-logging">
+          <label htmlFor="endTime">I woke up at:</label>
           <input
             type="time"
             id="endTime"
@@ -248,7 +252,7 @@ const SleepLog: FC<SleepLogProps> = ({ date }) => {
             required
           />
         </div>
-        <div className="form-group">
+        <div className="form-group-logging">
           <label htmlFor="sleepQuality">Sleep Quality:</label>
           <select
             id="sleepQuality"
@@ -263,8 +267,8 @@ const SleepLog: FC<SleepLogProps> = ({ date }) => {
             <option value="Excellent">Excellent</option>
           </select>
         </div>
-        <div className="form-group">
-          <label htmlFor="wakeUpCount">Number of Times Woke Up:</label>
+        <div className="form-group-logging">
+          <label htmlFor="wakeUpCount">During the night, I woke up:</label>
           <input
             type="number"
             id="wakeUpCount"
