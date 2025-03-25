@@ -1,7 +1,7 @@
 import React, { FC, useState, FormEvent } from 'react';
 import { differenceInMinutes, parseISO, addDays } from 'date-fns';
 import './SleepLog.css';
-import { Link } from 'react-router-dom';
+import { DayPicker } from "react-day-picker";
 
 interface SleepLogProps {
   date?: string;
@@ -205,17 +205,19 @@ const SleepLog: FC<SleepLogProps> = ({ date }) => {
   const handleAddAnother = () => {
     setShowSuccess(false);
   };
+
+  const [calendarDate, setCalendarDate] = useState<Date | undefined>();
   
   return (
     <div className="sleep-log">
-      <h1>Log Your Sleep</h1>
+      <h1 className="pb-4">Log Your Sleep</h1>
       {showSuccess ? (
         <div className="success-message">
           <p>Sleep cycle logged successfully!</p>
           <button onClick={handleAddAnother}>Add Another Cycle</button>
         </div>
       ) : (
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="form-container">
         <div className="form-group-logging">
           {/* <label htmlFor="date">Date:</label> */}
           <input
@@ -228,29 +230,31 @@ const SleepLog: FC<SleepLogProps> = ({ date }) => {
             required
           />
         </div>
-        <div className="form-group-logging">
-          <label htmlFor="startTime">Start Time:</label>
-          <input
-            type="time"
-            id="startTime"
-            name="startTime"
-            value={formData.startTime}
-            onChange={handleChange}
-            placeholder="I slept at"
-            required
-          />
-          {/* <label htmlFor="startTime">I went to sleep at:</label> */}
-        </div>
-        <div className="form-group-logging">
-          <label htmlFor="endTime">I woke up at:</label>
-          <input
-            type="time"
-            id="endTime"
-            name="endTime"
-            value={formData.endTime}
-            onChange={handleChange}
-            required
-          />
+        <div className="logging-date-group" >
+          <div className="form-group-logging">
+            <label htmlFor="startTime">From:</label>
+            <input
+              type="time"
+              id="startTime"
+              name="startTime"
+              value={formData.startTime}
+              onChange={handleChange}
+              placeholder="I slept at"
+              required
+            />
+          </div>
+          
+          <div className="form-group-logging">
+            <label htmlFor="endTime">To:</label>
+            <input
+              type="time"
+              id="endTime"
+              name="endTime"
+              value={formData.endTime}
+              onChange={handleChange}
+              required
+            />
+          </div>
         </div>
         <div className="form-group-logging">
           <label htmlFor="sleepQuality">Sleep Quality:</label>
@@ -281,7 +285,7 @@ const SleepLog: FC<SleepLogProps> = ({ date }) => {
           />
         </div>
         <button type="submit">Log Sleep</button>
-        </form>
+      </form>
       )}
 
       {/* Maybe display passed props (e.g., past logs) */}

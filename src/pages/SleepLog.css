@@ -1,24 +1,29 @@
 .sleep-log {
-    padding: 20px;
     max-width: 500px;
     margin: 0 auto;
+    padding-left: 2rem;
   }
   
   .sleep-log h1 {
     font-size: 1.8rem;
-    margin-bottom: 20px;
+    margin-bottom: 2rem;
+  }
+
+  .form-container {
+    padding: 2rem;
+    border-radius: 0.5rem;
   }
   
   .form-group-logging {
     display: flex;
     flex-direction: column;
-    margin-bottom: 15px;
+    margin-bottom: 1.5rem;
   }
   
   .form-group-logging label {
     display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+    margin-bottom: 2px;
+    font-weight: light;
   }
 
   input {
@@ -27,22 +32,25 @@
   
   .form-group-logging input, select {
     text-align: left;
-    padding: 0.75rem 3rem;
+    padding: 0.75rem 3rem 0.75rem 1.5rem;
     font-size: 1rem;
     border: none;
-    border-radius: 2rem;
+    border-radius: 1rem;
+    background-color:rgb(242, 242, 242);
   }
 
-  /* .form-group select {
-    width: 100%;
-    padding: 8px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  } */
+  .form-group-logging select, input {
+    background-color: rgb(242, 242, 242);
+  }
+
+  .logging-date-group {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+  }
   
   button {
-    background-color: #3498db;
+    background-color: #6e44ff;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -54,7 +62,7 @@
   }
   
   button:hover {
-    background-color: #2980b9;
+    background-color: #aec5eb;
   }
   
   .past-log {
@@ -62,4 +70,34 @@
     padding: 10px;
     background-color: #f9f9f9;
     border-radius: 4px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .form-container {
+      background-color: #2e294e;
+      color: rgb(142, 142, 142);
+    }
+
+    .form-group-logging select {
+      background-color:rgb(24, 24, 24);
+    }
+
+    input[type="time"]::-webkit-calendar-picker-indicator,
+    input[type="date"]::-webkit-calendar-picker-indicator,
+    select {
+      filter: invert(1); /*    Makes dark icons light**/
+    }
+  }
+  
+  @media (prefers-color-scheme: light) {
+    .form-container {
+      background-color: rgb(192, 186, 186);
+      color: rgb(66, 66, 66);
+    }
+
+    input[type="time"]::-webkit-calendar-picker-indicator,
+    input[type="date"]::-webkit-calendar-picker-indicator,
+    select {
+     filter: invert(0);  /* Keeps icons dark */
+    }
   }

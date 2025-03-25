@@ -1,7 +1,8 @@
 .sidebar {
     width: 200px;
     height: 100vh;
-    background-color: rgb(44, 62, 80);
+    /* background-color: #1b2432 rgb(44, 62, 80); */
+    background-color: #2e294e;
     color: white;
     position: fixed;
     top: 0;
