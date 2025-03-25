@@ -9,7 +9,8 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color:rgb(18, 18, 19);
+  /* background-color:rgb(18, 18, 19); */
+  background-color: #292a2d;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

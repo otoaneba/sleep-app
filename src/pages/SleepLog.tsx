@@ -210,7 +210,7 @@ const SleepLog: FC<SleepLogProps> = ({ date }) => {
   
   return (
     <div className="sleep-log">
-      <h1 className="pb-4">Log Your Sleep</h1>
+      <h1 className="pb-1">Log Your Sleep</h1>
       {showSuccess ? (
         <div className="success-message">
           <p>Sleep cycle logged successfully!</p>

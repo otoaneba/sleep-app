@@ -179,7 +179,7 @@ const Generate: FC<GenerateProps> = ({ onScheduleGenerated }) => {
         <h1>Circadian Rhythm Adjustment</h1>
         
         <div className="generate-content">
-            <div className="form-group">
+            <div className="form-group-logging">
                 <label>
                     What time do you usually wake up?
                 </label>
@@ -191,7 +191,7 @@ const Generate: FC<GenerateProps> = ({ onScheduleGenerated }) => {
                 />
             </div>
 
-            <div className="radio-group">
+            {/* <div className="radio-group">
                 <label>
                     Traveling East or West?
                 </label>
@@ -219,9 +219,22 @@ const Generate: FC<GenerateProps> = ({ onScheduleGenerated }) => {
                         <span className="ml-2">West (shift to later wake up time)</span>
                     </label>
                 </div>
+            </div> */}
+            <div className="form-group-logging">
+              <label className="">
+                  Traveling direction:
+              </label>
+              <select
+                  value={adjustmentDays}
+                  onChange={(e) => setAdjustmentType(e.target.value as 'advance' | 'delay')}
+                  className=""
+              >
+                  <option value={"advance"}>East (shift to ealier wake up time)</option>
+                  <option value={"delay"}>West (shift to later wake up time)</option>
+              </select>
             </div>
 
-            <div className="form-group">
+            <div className="form-group-logging">
             <label>
                 Time difference (in hours) between your home and destination:
             </label>
@@ -235,20 +248,20 @@ const Generate: FC<GenerateProps> = ({ onScheduleGenerated }) => {
             />
             </div>
 
-            <div className="form-group">
-            <label className="">
-                Number of adjustment days:
-            </label>
-            <select
-                value={adjustmentDays}
-                onChange={(e) => setAdjustmentDays(Number(e.target.value))}
-                className=""
-            >
-                <option value={2}>2 days</option>
-                <option value={3}>3 days</option>
-                <option value={4}>4 days</option>
-                <option value={5}>5 days</option>
-            </select>
+            <div className="form-group-logging">
+              <label className="">
+                  Number of adjustment days:
+              </label>
+              <select
+                  value={adjustmentDays}
+                  onChange={(e) => setAdjustmentDays(Number(e.target.value))}
+                  className=""
+              >
+                  <option value={2}>2 days</option>
+                  <option value={3}>3 days</option>
+                  <option value={4}>4 days</option>
+                  <option value={5}>5 days</option>
+              </select>
             </div>
 
             <button

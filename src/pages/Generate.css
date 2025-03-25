@@ -1,20 +1,26 @@
 .generate {
-    margin-left: 20px;
-    padding: 20px;
-    max-width: 500px;
+    max-width: 600px;
+    padding-left: 2rem;
     margin: 0 auto;
+    font-family: DeepSeek-CJK-patch, Inter, system-ui, -apple-system;
   }
 
 .generate h1 {
-    font-size: 1.8rem;
-    margin-bottom: 20px;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    margin-top: 1.5rem;
 }
       
 .generate-content {
+    background-color: #212327;
+    box-shadow: 0 0 0 10px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+    padding: 2rem;
     label {
         display: block;
         margin-bottom: 5px;
-        font-weight: bold;
+        font-weight: 500;
+        color: #8e8e8e;
     }
 
     .form-group {
@@ -29,40 +35,40 @@
         margin: 1rem 0 1rem 1rem;
     }
     .form-radio {
-        margin-left: 1rem;
+        margin-left: 2rem;
         margin-top: 1rem;
     }
 }
   
 .generate-form-card {
-background-color: white;
-border-radius: 0.5rem;
-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-padding: 1.5rem;
-margin-bottom: 1.5rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .generate-results-card {
-background-color: white;
-border-radius: 0.5rem;
-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-padding: 1.5rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
 }
 
 .generate-info-box {
-background-color: #EFF6FF;
-border-radius: 0.5rem;
-padding: 1rem;
-margin-top: 1.5rem;
+    background-color: #EFF6FF;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-top: 1.5rem;
 }
 
 .generate-button {
-margin-top: 1.5rem;
-width: 100%;
+    margin-top: 1.5rem;
+    width: 100%;
 }
 
 .generate-calendar-button {
-margin-top: 1.5rem;
-display: flex;
-justify-content: center;
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
 }

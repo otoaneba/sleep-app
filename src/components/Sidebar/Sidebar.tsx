@@ -1,12 +1,13 @@
 import { NavLink } from 'react-router-dom';
 import { FC } from 'react';
 import './Sidebar.css';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMoon, faBed } from '@fortawesome/free-solid-svg-icons';
 interface SidebarProps {}
 
 const Sidebar: FC<SidebarProps> = () => (
   <div className="sidebar">
-      <h2>Sleep App</h2>
+      <FontAwesomeIcon icon={faBed} className='app-icon' />
       <nav>
         <ul>
           <li>
