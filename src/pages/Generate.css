@@ -79,11 +79,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-    /* .generate-content {
-      background-color: #212327;
-      color: white;
-      border-right: 1px solid rgb(13, 14, 15);
-    } */
+
   }
   
   @media (prefers-color-scheme: light) {
