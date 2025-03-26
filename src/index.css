@@ -20,7 +20,7 @@
 
 body {
   margin: 0;
-  display: flex;
+  /* display: flex; */
   /* place-items: center; */
   padding-top: 1rem;
   min-width: 320px;

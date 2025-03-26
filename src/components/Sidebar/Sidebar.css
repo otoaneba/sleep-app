@@ -1,7 +1,6 @@
 .sidebar {
     width: 200px;
     height: 100vh;
-    /* background-color: #1b2432 rgb(44, 62, 80); */
     background-color: #212327;
     color: white;
     position: fixed;
@@ -9,9 +8,9 @@
     left: 0;
     display: flex;
     flex-direction: column;
-    //box-shadow: 1px 0 3px rgba(0, 0, 0, 0.2);
     box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.1);
     border-right: 1px solidrgb(13, 14, 15);
+    transition: transform 0.3s ease;
   }
   
   .app-icon {
@@ -49,6 +48,27 @@
     background-color: rgba(255, 255, 255, 0.1);
     color: white;
   }
+
+  @media (max-width: 768px) {
+    .sidebar {
+      transform: translateX(-100%); /* Hide it by dafault */
+      width: 100%;
+      z-index: 1000;
+    }
+  
+    .sidebar.open {
+      transform: translateX(0); /* Show when open */
+    }
+  
+    /* Hamburger menu */
+    .menu-button {
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      z-index: 1001;
+    }
+  }
+  
 
   @media (prefers-color-scheme: dark) {
     .sidebar {

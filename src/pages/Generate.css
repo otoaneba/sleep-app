@@ -1,7 +1,6 @@
 .generate {
     max-width: 600px;
     padding-left: 2rem;
-    margin: 0 auto;
     font-family: DeepSeek-CJK-patch, Inter, system-ui, -apple-system;
   }
 
@@ -94,3 +93,17 @@
       border-right: 1px solid #dee2e6;
     }
   }
+
+@media (max-width: 768px) {
+  .generate {
+    padding: 1rem 0.5rem 1rem 0.5rem;
+  }
+
+  .generate-content {
+    padding: 1rem;
+  }
+
+  .form-group {
+    margin-right: 0;
+  }
+}

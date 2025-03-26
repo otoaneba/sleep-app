@@ -1,6 +1,5 @@
 .sleep-log {
-    max-width: 500px;
-    margin: 0 auto;
+    max-width: 600px;
     padding-left: 2rem;
     font-family: DeepSeek-CJK-patch, Inter, system-ui, -apple-system;
   }
@@ -116,5 +115,20 @@
     input[type="date"]::-webkit-calendar-picker-indicator,
     select {
      filter: invert(0);  /* Keeps icons dark */
+    }
+  }
+
+  @media (max-width: 768px) {
+    .sleep-log {
+      padding: 1rem 0.5rem 1rem 0.5rem;
+    }
+
+    .form-container {
+      padding: 1rem;
+    }
+
+    .logging-date-group {
+      flex-direction: column;
+      gap: 0.5rem;
     }
   }
