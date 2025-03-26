@@ -9,11 +9,12 @@
     font-size: 1.5rem;
     margin-bottom: 1rem;
     margin-top: 1.5rem;
+    font-weight: 450;
 }
       
 .generate-content {
     background-color: #212327;
-    box-shadow: 0 0 0 10px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.1);
     border-radius: 1rem;
     padding: 2rem;
     label {
@@ -67,8 +68,29 @@
     width: 100%;
 }
 
+.generate-button:disabled {
+    background-color: #ccc;
+    color: #666;
+}
+
 .generate-calendar-button {
     margin-top: 1.5rem;
     display: flex;
     justify-content: center;
 }
+
+@media (prefers-color-scheme: dark) {
+    /* .generate-content {
+      background-color: #212327;
+      color: white;
+      border-right: 1px solid rgb(13, 14, 15);
+    } */
+  }
+  
+  @media (prefers-color-scheme: light) {
+    .generate-content {
+      background-color: #f9fbff;
+      color: #212327;
+      border-right: 1px solid #dee2e6;
+    }
+  }

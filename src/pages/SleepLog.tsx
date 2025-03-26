@@ -284,7 +284,7 @@ const SleepLog: FC<SleepLogProps> = ({ date }) => {
             required
           />
         </div>
-        <button type="submit">Log Sleep</button>
+        <button type="submit" disabled={!formData.startTime || !formData.endTime}>Log Sleep</button>
       </form>
       )}
 

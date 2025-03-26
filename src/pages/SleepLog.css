@@ -9,6 +9,7 @@
     font-size: 1.5rem;
     margin-bottom: 1rem;
     margin-top: 1.5rem;
+    font-weight: 450;
   }
 
   .form-container {
@@ -64,6 +65,11 @@
   button:hover {
     background-color: #aec5eb;
   }
+
+  button:disabled {
+    background-color: #ccc;
+    color: #666;
+  }
   
   .past-log {
     margin-top: 20px;
@@ -75,7 +81,10 @@
   @media (prefers-color-scheme: dark) {
     .form-container {
       background-color: #212327;
-      color: rgb(142, 142, 142);
+    }
+
+    .form-group-logging label {
+      color: #8e8e8e;
     }
 
     .form-group-logging select {
@@ -91,8 +100,16 @@
   
   @media (prefers-color-scheme: light) {
     .form-container {
-      background-color: rgb(192, 186, 186);
-      color: rgb(66, 66, 66);
+      background-color: #f9fbff;
+      color: #424242;
+    }
+
+    .form-group-logging input, select {
+      background-color: #f3f4f6;
+    }
+
+    .form-group-logging label {
+      color: #353434;
     }
 
     input[type="time"]::-webkit-calendar-picker-indicator,

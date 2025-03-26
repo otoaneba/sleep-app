@@ -194,9 +194,11 @@ useEffect(() => {
   return (
     <div className="analyze">
       <h1>Analyze Your Sleep Trends</h1>
+      <div className="analyze-container">
+
       <div className="date-range">
-        <div className="form-group">
-          <label htmlFor="startDate">Start Date:</label>
+        <div className="form-group-logging">
+          <label htmlFor="startDate">From:</label>
           <input
             type="date"
             id="startDate"
@@ -205,8 +207,8 @@ useEffect(() => {
             required
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="endDate">End Date:</label>
+        <div className="form-group-logging">
+          <label htmlFor="endDate">To:</label>
           <input
             type="date"
             id="endDate"
@@ -243,10 +245,14 @@ useEffect(() => {
           </div>
         </>
       )}
-      <button onClick={handleStreamingAnalysis} disabled={isStreaming}>
-            {isStreaming ? (
-              <>
-                <span className="spinner" /> Analyzing...
+      <button
+        className="analyze-button"
+        onClick={handleStreamingAnalysis}
+        disabled={isStreaming || filteredObservations.length === 0}
+      >
+        {isStreaming ? (
+          <>
+            <span className="spinner" /> Analyzing...
               </>
             ) : (
               'Analyze Sleep'
@@ -261,7 +267,7 @@ useEffect(() => {
           </div>
         </div>
       )}
-
+      </div>
     </div>
   );
 };

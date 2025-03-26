@@ -265,8 +265,9 @@ const Generate: FC<GenerateProps> = ({ onScheduleGenerated }) => {
             </div>
 
             <button
-            onClick={generateSchedule}
-            className=""
+              onClick={generateSchedule}
+              className="generate-button"
+              disabled={!userWakeTime}
             >
             Generate Schedule
             </button>
