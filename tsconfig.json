@@ -8,7 +8,10 @@
     "jsx": "react-jsx",
     "composite": true,
     "noEmit": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "types": ["react"],
+    "esModuleInterop": true,
+    "skipLibCheck": true
   },
   "include": ["src", "src/types/custom.d.ts"]
 }
