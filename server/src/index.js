@@ -9,7 +9,8 @@ const allowedOrigins = [
     'http://localhost:5173',
     'https://github.gatech.edu',
     'https://github.gatech.edu/pages/nabe7/sleep-app',
-    'https://github.gatech.edu/nabe7/sleep-app' 
+    'https://github.gatech.edu/nabe7/sleep-app',
+    'https://otoaneba.github.io'
 ];
 
 const corsOptions = {

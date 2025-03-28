@@ -8,10 +8,11 @@ import './App.css';
 function App() {
 
   return (
-    <Router basename={import.meta.env.DEV ? "/" : "/pages/nabe7/sleep-app/"}>
+    <Router basename={import.meta.env.DEV ? "/" : "/sleep-app/"}>
     <div className="app">
       <Sidebar />
       <div className="main-content">
+        test
         <Routes>
           <Route path={import.meta.env.DEV ? "/" : "/"} element={<SleepLog />} />
           <Route path={import.meta.env.DEV ? "/log" : "log"} element={<SleepLog />} />
