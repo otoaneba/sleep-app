@@ -11,6 +11,7 @@ class AzureService {
             this.tenantId = config.AZURE_TENANT_ID;
             this.clientId = config.AZURE_CLIENT_ID;
             this.clientSecret = config.AZURE_CLIENT_SECRET;
+            console.log("Azure credentials found", this.tenantId, this.clientId, this.clientSecret);
         } else {
             this.apiKey = config.AZURE_API_KEY;
         }

@@ -28,6 +28,7 @@ export const streamAzureAI = async (
   onError: (error: string) => void
 ) => {
   try {
+    console.log("Streaming Azure AI URL", API_URL);
     const response = await fetch(`${API_URL}/test-client-stream/stream`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
