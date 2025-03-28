@@ -106,7 +106,7 @@ class AzureService {
 
             const client = new ModelClient(this.endpoint, credential, clientOptions);
 
-            console.log("Client initialized successfully \n");
+            console.log("Client initialized successfully");
             
             const response = await client.path("chat/completions").post({
                 body: {
