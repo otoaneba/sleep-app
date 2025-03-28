@@ -31,3 +31,6 @@ server/src/.env.production
 server/src/.env.development
 # Log files
 *.log
+
+# Build info
+tsconfig.tsbuildinfo

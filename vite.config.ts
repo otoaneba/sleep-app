@@ -6,7 +6,7 @@ export default defineConfig(({mode}) => {
   // console.log('Mode:', mode);
   return {
   plugins: [react()],
-  base: mode === 'production' ? '/pages/nabe7/sleep-app/' : '/',
+  base: mode === 'production' ? '/sleep-app/' : '/',
   define: {
     'import.meta.env.VITE_API_URL': JSON.stringify(
       mode === 'production'
