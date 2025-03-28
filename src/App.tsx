@@ -12,7 +12,6 @@ function App() {
     <div className="app">
       <Sidebar />
       <div className="main-content">
-        test
         <Routes>
           <Route path={import.meta.env.DEV ? "/" : "/"} element={<SleepLog />} />
           <Route path={import.meta.env.DEV ? "/log" : "log"} element={<SleepLog />} />
