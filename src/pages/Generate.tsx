@@ -76,11 +76,11 @@ const Generate: FC<GenerateProps> = ({ onScheduleGenerated }) => {
         //   console.log("Total shift minutes for day ", day, " is ", totalShiftMinutes, "type of totalShiftMinutes: ", typeof totalShiftMinutes);
           const newWakeTime = addMinutes(baseWakeTimeForDay, totalShiftMinutes);
         //   console.log("Base wake time for day ", day, " is ", baseWakeTimeForDay, "type of baseWakeTimeForDay: ", typeof baseWakeTimeForDay);
-          console.log("New wake time for day ", day, " is ", newWakeTime, "type of newWakeTime: ", typeof newWakeTime);
+          // console.log("New wake time for day ", day, " is ", newWakeTime, "type of newWakeTime: ", typeof newWakeTime);
  
     
           const newTempMinimum = calculateTempMinimum(newWakeTime);
-          console.log("New temp minimum for day ", day, " is ", newTempMinimum, "type of newTempMinimum: ", typeof newTempMinimum);
+          // console.log("New temp minimum for day ", day, " is ", newTempMinimum, "type of newTempMinimum: ", typeof newTempMinimum);
           // Light exposure windows (using minutes instead of hours for consistency)
           const newLightExposureStart = adjustmentType === 'advance'
             ? addMinutes(newTempMinimum, 4 * 60) // 4 hours = 240 minutes
@@ -105,7 +105,7 @@ const Generate: FC<GenerateProps> = ({ onScheduleGenerated }) => {
             lightExposureEnd: newLightExposureEnd,
             bedtimeSuggestion: bedtimeSuggestion,
           });
-          console.log("New ISO schedule entry for day ", day, " is ", newScheduleEntry);
+          // console.log("New ISO schedule entry for day ", day, " is ", newScheduleEntry);
         }
         setIsoSchedule(newScheduleEntry);
     
@@ -280,7 +280,7 @@ const Generate: FC<GenerateProps> = ({ onScheduleGenerated }) => {
                     <ul className="">
                     {isoSchedule.map((entry, index) => {
                         return (
-                            <li>
+                            <li key={index}>
                                 <p>Your temperature minimum occurs at {entry.tempMinimum.toLocaleTimeString()} on day {index + 1}</p>
                             </li>
                         )
