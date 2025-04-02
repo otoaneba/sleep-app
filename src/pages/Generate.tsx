@@ -125,9 +125,8 @@ const Generate: FC<GenerateProps> = ({ onScheduleGenerated }) => {
         const events: any[] = [];
 
         isoSchedule.forEach((entry, _) => {
-
             events.push({
-                start: [entry.wakeTime.getFullYear(), entry.wakeTime.getMonth(), entry.wakeTime.getDate(), entry.wakeTime.getHours(), entry.wakeTime.getMinutes()],
+                start: [entry.wakeTime.getFullYear(), entry.wakeTime.getMonth()+1, entry.wakeTime.getDate(), entry.wakeTime.getHours(), entry.wakeTime.getMinutes()],
                 duration: { minutes: 30 },
                 title: 'Wake Up - Circadian Adjustment',
                 description: `Wake up time for circadian rhythm adjustment. Temperature minimum occurs around ${entry.tempMinimum}.`,
@@ -137,15 +136,15 @@ const Generate: FC<GenerateProps> = ({ onScheduleGenerated }) => {
             });
 
             events.push({
-                start: [entry.lightExposureStart.getFullYear(), entry.lightExposureStart.getMonth(), entry.lightExposureStart.getDate(), entry.lightExposureStart.getHours(), entry.lightExposureStart.getMinutes()],
-                end: [entry.lightExposureEnd.getFullYear(), entry.lightExposureEnd.getMonth(), entry.lightExposureEnd.getDate(), entry.lightExposureEnd.getHours(), entry.lightExposureEnd.getMinutes()],
+                start: [entry.lightExposureStart.getFullYear(), entry.lightExposureStart.getMonth()+1, entry.lightExposureStart.getDate(), entry.lightExposureStart.getHours(), entry.lightExposureStart.getMinutes()],
+                end: [entry.lightExposureEnd.getFullYear(), entry.lightExposureEnd.getMonth()+1, entry.lightExposureEnd.getDate(), entry.lightExposureEnd.getHours(), entry.lightExposureEnd.getMinutes()],
                 title: `Light Exposure - ${adjustmentType === 'advance' ? 'Phase Advance' : 'Phase Delay'}`,
                 description: 'Get bright light exposure during this window for circadian rhythm adjustment.',
                 location: 'Anywhere with bright light',
             });
 
             events.push({
-                start: [entry.bedtimeSuggestion.getFullYear(), entry.bedtimeSuggestion.getMonth(), entry.bedtimeSuggestion.getDate(), entry.bedtimeSuggestion.getHours(), entry.bedtimeSuggestion.getMinutes()],
+                start: [entry.bedtimeSuggestion.getFullYear(), entry.bedtimeSuggestion.getMonth()+1, entry.bedtimeSuggestion.getDate(), entry.bedtimeSuggestion.getHours(), entry.bedtimeSuggestion.getMinutes()],
                 duration: { minutes: 30 },
                 title: 'Bedtime - Circadian Adjustment',
                 description: 'Suggested bedtime for circadian rhythm adjustment.',
